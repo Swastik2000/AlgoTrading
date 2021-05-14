@@ -1,0 +1,19 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Best in 30 minute time frame
+
+//@version=4
+strategy("crossover with MACD", overlay=true)
+fast = 12, slow = 26
+fastMA = ema(close, fast)
+slowMA = ema(close, slow)
+macd = fastMA - slowMA
+signal = sma(macd, 9)
+longCondition = crossover(macd, signal)
+if (longCondition)
+    strategy.entry("Long", strategy.long)
+
+
+    
+longExitCondition = crossunder(macd, signal)
+
+strategy.close("Long", when = longExitCondition)
