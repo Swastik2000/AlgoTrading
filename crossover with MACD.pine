@@ -12,8 +12,9 @@ longCondition = crossover(macd, signal)
 if (longCondition)
     strategy.entry("Long", strategy.long)
 
-
+threeGreenCandles = (close[2] > open[2]) and (close[1] > open[1])
+     and (close > open)
     
-longExitCondition = crossunder(macd, signal)
+longExitCondition = threeGreenCandles
 
 strategy.close("Long", when = longExitCondition)
